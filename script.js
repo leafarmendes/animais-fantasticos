@@ -43,4 +43,29 @@ function initAccordionList() {
 
 initAccordionList();
 
+function initSmoothScroll() {
+  const internalLinks = document.querySelectorAll('.js-menu a[href^="#"]')
 
+  function scrollToSmooth(event) {
+    event.preventDefault();
+    const href = event.currentTarget.getAttribute('href');
+    const section = document.querySelector(href);
+
+    //first way
+    /*section.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });*/
+
+    //second way
+    const getTop = section.offsetTop;
+    window.scrollTo({
+      top: getTop,
+      behavior: 'smooth',
+    })
+  }
+
+  internalLinks.forEach((link) => {
+    link.addEventListener('click', scrollToSmooth);
+  });
+}
