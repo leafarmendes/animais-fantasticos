@@ -69,3 +69,24 @@ function initSmoothScroll() {
     link.addEventListener('click', scrollToSmooth);
   });
 }
+
+const sections = document.querySelectorAll('.js-scroll');
+const halfWindow = window.innerHeight * 0.6;
+
+if(sections.length) {
+  function animateWhenScrolled() {
+    sections.forEach((section) => {
+      const getTopSection = section.getBoundingClientRect().top;
+      const isSectionVisible = (getTopSection - halfWindow) < 0;
+      if(isSectionVisible) {
+        section.classList.add(activeClass);
+      } else {
+        section.classList.remove(activeClass);
+      }
+    })
+  }
+  
+  window.addEventListener('scroll', animateWhenScrolled);
+  
+  animateWhenScrolled();
+}
